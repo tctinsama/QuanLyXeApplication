@@ -1,38 +1,44 @@
 package org.example.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
+@Table(name = "xe")
 public class Xe {
-
     @Id
-    private String bienSoXe;
+    @Column(name="MaXe" , length = 20)
+    private String maXe;
 
-    private LocalDate hanKiemDinh;
+    @Column(name="HangSanXuat" , length = 20)
+    private String hangSanXuat;
 
-    public Xe() {
-    }
+    @Column(name="MaLoaiXe", length = 20)
+    private String maLoaiXe;
 
-    public Xe(String bienSoXe, LocalDate hanKiemDinh) {
-        this.bienSoXe = bienSoXe;
-        this.hanKiemDinh = hanKiemDinh;
-    }
+    @ManyToOne
+    @JoinColumn(name = "MaLoaiXe", referencedColumnName = "MaLoaiXe", insertable = false, updatable = false)
+    private LoaiXe loaiXe;
 
-    public String getBienSoXe() {
-        return bienSoXe;
-    }
+    @Column(name="BienSo" , length = 20)
+    private String bienSo;
 
-    public void setBienSoXe(String bienSoXe) {
-        this.bienSoXe = bienSoXe;
-    }
+    @Column(name="HanKiemDinh" , length = 20)
+    private LocalDateTime hanKiemDinh;
 
-    public LocalDate getHanKiemDinh() {
-        return hanKiemDinh;
-    }
+    @Column(name="MaNhaXe", length = 20)
+    private String maNhaXe;
 
-    public void setHanKiemDinh(LocalDate hanKiemDinh) {
-        this.hanKiemDinh = hanKiemDinh;
-    }
+    @ManyToOne
+    @JoinColumn(name = "MaNhaXe", referencedColumnName = "MaNhaXe", insertable = false, updatable = false)
+    private NhaXe nhaXe;
+
+    @OneToMany(mappedBy = "xe", cascade = CascadeType.ALL)
+    private List<LichTrinhXe> lichtrinhxes;
 }

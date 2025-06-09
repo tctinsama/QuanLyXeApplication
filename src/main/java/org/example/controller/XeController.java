@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dto.resp.XeLichTrinhInfoResp;
 import org.example.service.Xe.XeService;
 import org.example.service.LoaiXe.LoaiXeService;
 import org.example.service.NhaXe.NhaXeService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/xe")
@@ -32,15 +35,34 @@ public class XeController {
     }
 
     // Handle create
+    // Xử lý lưu xe mới
     @PostMapping("/save")
     public String save(@ModelAttribute("xe") Xe xe, Model model) {
         try {
             xeService.save(xe);
-            return "redirect:/xe/create";
+            return "redirect:/xe/create?success"; // redirect có thể kèm param báo thành công
         } catch (IllegalArgumentException ex) {
             model.addAttribute("error", ex.getMessage());
-            return "Xe/xeCreate";
+            model.addAttribute("loaixes", loaiXeService.findAll());
+            model.addAttribute("nhaxes", nhaXeService.findAll());
+            return "Xe/xeCreate"; // Trả lại form với thông báo lỗi
         }
+    }
+
+    @GetMapping("/lichtrinh")
+    public String danhSachXeLichTrinh(
+            @RequestParam(value = "tenNhaXe", required = false) String tenNhaXe,
+            Model model) {
+
+        // Nếu ko có tên nhà xe thì truyền rỗng để lấy tất cả
+        if (tenNhaXe == null) {
+            tenNhaXe = "";
+        }
+
+        List<XeLichTrinhInfoResp> dsXe = xeService.getXeLichTrinh(tenNhaXe);
+        model.addAttribute("dsXe", dsXe);
+        model.addAttribute("tenNhaXe", tenNhaXe);
+        return "Xe/lichtrinh";
     }
 
 //    // Show form edit
