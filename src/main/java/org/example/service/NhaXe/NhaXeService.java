@@ -1,4 +1,4 @@
-package org.example.service.LoaiXec.LoaiXe;
+package org.example.service.NhaXe;
 
 import org.example.model.NhaXe;
 
