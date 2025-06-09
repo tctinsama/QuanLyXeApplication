@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nhập Xe</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/validation.js"></script>
+</head>
+<body>
+<h1>Nhập Xe</h1>
+<div th:if="${error}" style="color:red">[[${error}]]</div>
+<form th:action="@{/xe}" method="post">
+    <label>Biển số xe:</label>
+    <input type="text" name="bienSoXe" maxlength="10" required/>
+    <br/>
+    <label>Hạn kiểm định:</label>
+    <input type="date" name="hanKiemDinh" required/>
+    <br/>
+    <button type="submit">Lưu</button>
+</form>
+</body>
+</html>
