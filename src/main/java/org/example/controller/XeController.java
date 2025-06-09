@@ -33,9 +33,14 @@ public class XeController {
 
     // Handle create
     @PostMapping("/save")
-    public String save(@ModelAttribute("xe") Xe xe) {
-        xeService.save(xe);
-        return "redirect:/xe/create";
+    public String save(@ModelAttribute("xe") Xe xe, Model model) {
+        try {
+            xeService.save(xe);
+            return "redirect:/xe/create";
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "Xe/xeCreate";
+        }
     }
 
 //    // Show form edit

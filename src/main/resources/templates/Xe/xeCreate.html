@@ -1,64 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script th:src="@{/js/validation.js}"></script>
-    <title>Thêm Xe</title>
-</head>
-<body>
-<div class="container mt-4">
-    <div class="card p-4 shadow-sm">
-        <h2 class="mb-4">Thêm Xe</h2>
-        <form th:action="@{/xe/save}" th:object="${xe}" method="post">
-            <div class="mb-3">
-                <label class="form-label">Mã xe</label>
-                <input type="text" th:field="*{maXe}" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Hãng Sản Xuất</label>
-                <input type="text" th:field="*{hangSanXuat}" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Mã Loại Xe </label>
-                <select th:field="*{loaiXe.maLoaiXe}" class="form-select" required>
-                    <option value="" disabled selected>-- Chọn loại xe --</option>
-                    <option th:each="lx : ${loaixes}" th:value="${lx.maLoaiXe}" th:text="${lx.maLoaiXe}"></option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Biển số</label>
-                <input type="text" th:field="*{bienSo}" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Hạn kiểm định</label>
-                <input type="text" th:field="*{hanKiemDinh}" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Tên Nhà Xe</label>
-                <select th:field="*{nhaXe.maNhaXe}" class="form-select" required>
-                    <option value="" disabled selected>-- Chọn nhà Xe --</option>
-                    <option th:each="nx : ${nhaxes}" th:value="${nx.maNhaXe}" th:text="${nx.tenNhaXe}"></option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-success">Lưu</button>
-            <a th:href="@{/xe}" class="btn btn-secondary">Hủy</a>
-        </form>
-    </div>
-</div>
-=======
     <meta charset="UTF-8"/>
     <title>Nhập Xe</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -67,7 +9,7 @@
 <body>
 <h1>Nhập Xe</h1>
 <div th:if="${error}" style="color:red">[[${error}]]</div>
-<form th:action="@{/xe}" method="post">
+<form th:action="@{/xe/save}" method="post">
     <label>Biển số xe:</label>
     <input type="text" name="bienSoXe" maxlength="10" required/>
     <br/>
@@ -76,6 +18,5 @@
     <br/>
     <button type="submit">Lưu</button>
 </form>
->>>>>>> f92e5723c3c791cf3e20cb493599973d75fe4f32
 </body>
 </html>
