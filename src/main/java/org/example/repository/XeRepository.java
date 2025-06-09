@@ -1,4 +1,7 @@
 package org.example.repository;
 
-public interface XeRepository {
+import org.example.model.Xe;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface XeRepository extends JpaRepository<Xe, String> {
 }

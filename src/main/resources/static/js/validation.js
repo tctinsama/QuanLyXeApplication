@@ -36,6 +36,11 @@ $(document).ready(function(){
       alert('Mã DV không hợp lệ');
       valid = false;
     }
+    var bienSo = form.find('input[name$="bienSoXe"]');
+    if(bienSo.length && !/^\d{2}[A-Z]\d-\d{5}$/.test(bienSo.val())){
+      alert('Biển số xe không hợp lệ');
+      valid = false;
+    }
     if(!valid){
       e.preventDefault();
     }
